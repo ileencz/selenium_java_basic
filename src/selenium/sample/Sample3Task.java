@@ -48,18 +48,28 @@ public class Sample3Task {
 //         check that it is True that value of second button is
 //         "this is Also a Button" if you ignore Caps Locks
 //         fail with custom error message:
+        List<WebElement> testElements = driver.findElements(By.className("test"));
+        assertEquals(testElements.size(), 5);
+        WebElement button = driver.findElement(By.id("buttonId"));
+        assertEquals(button.getAttribute("value"), "This also a button");
     }
 
     @Test
     public void assertFalseTask() throws Exception {
 //         TODO:
 //        check that it is False that value of second button is "This is a button"
+        String errorText = "Some error text";
+        String expectedString = "this is Also a Button";
+        WebElement button = driver.findElement(By.id("buttonId"));
+        assertTrue(button.getAttribute("value").equalsIgnoreCase(expectedString) );
+        assertTrue(errorText, button.getAttribute("value").equalsIgnoreCase(expectedString));
     }
 
     @Test
-    public void failTask() throws Exception {
+    public void assertFailTask() throws Exception {
 //        TODO:
 //        check that none of items with class "test"
 //        contain number 190
+        assertFalse(driver.findElement(By.id("buttonId")).getAttribute("value").equals("This is a button"));
     }
 }
