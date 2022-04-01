@@ -9,10 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.File;
-import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class Task1 {
     WebDriver driver;
@@ -50,7 +48,7 @@ public class Task1 {
         driver.findElement(By.id("numb")).sendKeys(textToEnter);
         driver.findElement(By.tagName("button")).click();
         System.out.println(driver.findElement(By.id("ch1_error")).getText());
-        assertEquals("Number is too small: ", driver.findElement(By.id("ch1_error")).getText());
+        assertEquals("Number is too small", driver.findElement(By.id("ch1_error")).getText());
     }
 
     @Test
@@ -93,5 +91,13 @@ public class Task1 {
 //        TODO
 //        enter a number between 50 and 100 digit in the input (square root of which doesn't have a remainder, e.g. 1.732.. is square root of 3) and press submit,
 //        then check that correct no error is seen and check that square root is calculated correctly
+        String textToEnter = "63";
+        driver.findElement(By.id("numb")).sendKeys(textToEnter);
+        driver.findElement(By.tagName("button")).click();
+        String expectedMessage = "Square root of 63 is 7.94";
+        Alert alert = driver.switchTo().alert();
+        String actualMessage = alert.getText();
+        alert.accept();
+        assertEquals(expectedMessage, actualMessage);
     }
 }
